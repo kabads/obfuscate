@@ -12,21 +12,6 @@ UPPER_CONSONANT_LIST = ['B', 'C', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'M', 'N', '
                         'Z']
 DIGIT_LIST = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 
-HEADER=["ACCOUNT","NAME","ADDRESS(1)", "ADDRESS(2)", "ADDRESS(3)", "ADDRESS(4)", "POSTCODE", "COUNTRY",
-        "EMAIL", "PHONE(1)", "HOSTAC", "INVACC", "STATACC", "BRANCH", "BRAND", "REGISTRATION",
-        "ownership"]
-
-
-def obfuscate_number(number):
-    new_number = ''
-    for i in number:
-        if i != ' ':
-            tmp = random.randint(0, 9)
-            new_number = new_number + str(tmp)
-        else:
-            new_number = new_number + ' '
-    return new_number
-
 
 def obfuscate(string):
     new_string = ''
@@ -67,20 +52,20 @@ def read_file(file, columns, outfilename=None):
         for row in csv_reader:
             # Iterate through all the columns, but if a column matches something in columns,
             # then it should be obfuscated
-            newrow = [] # an array to hold our new row as we read the columns.
-            if rowcount != 0: # if this is zero, then we are at the header
+            newrow = []  # an array to hold our new row as we read the columns.
+            if rowcount != 0:  # if this is zero, then we are at the header
                 # Iterate over the columns in the row keeping columncount as a counter
                 columncount = 0
                 for column in row:
-                    newcell = "" # This will hold the contents of the new cell
-                    if str(columncount) in columns: # Check if this is one of the files that needs obfuscaton:
-                        for i in (column): # Loop through each character and change it
-                            i = obfuscate(i) # This is the character being passed to obfuscate and returned
-                            newcell = newcell + i # Collect all the random characters in newcell:
+                    newcell = ""  # This will hold the contents of the new cell
+                    if str(columncount) in columns:  # Check if this is one of the files that needs obfuscation:
+                        for i in column:  # Loop through each character and change it
+                            i = obfuscate(i)  # This is the character being passed to obfuscate and returned
+                            newcell = newcell + i  # Collect all the random characters in newcell:
 
-                        newrow.append(newcell) # Append the newcell to the new row
+                        newrow.append(newcell)  # Append the newcell to the new row
                     else:  # This column is not obfuscated
-                        newrow.append(column) # Append the newcell to the new row
+                        newrow.append(column)  # Append the newcell to the new row
                     columncount = columncount + 1
             # If the cell doesn't need obfuscating, then just carry on
             else:

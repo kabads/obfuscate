@@ -1,8 +1,6 @@
 import csv
 import random
 import argparse
-import re
-import time
 
 LOWER_VOWEL_LIST = ['a', 'e', 'i', 'o', 'u']
 UPPER_VOWEL_LIST = ['A', 'E', 'I', 'O', 'U']
